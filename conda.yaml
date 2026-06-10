@@ -1,0 +1,11 @@
+name: wine_mlops_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - mlflow==2.11.3
+      - scikit-learn==1.4.2
+      - pandas==2.2.2
