@@ -1,4 +1,4 @@
-name: Wine_Quality_MLOps
+name: Diabetes_CI_Pipeline
 
 conda_env: conda.yaml
 
