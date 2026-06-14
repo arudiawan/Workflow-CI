@@ -3,14 +3,20 @@ import mlflow
 import mlflow.sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+import os
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+if os.environ.get('GITHUB_ACTIONS') == 'true':
+    print("🤖 Berjalan di GitHub Actions: Menggunakan Local File Store.")
+else:
+    print("💻 Berjalan di Laptop Lokal: Menghubungkan ke http://127.0.0.1:5000")
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+
 mlflow.set_experiment("Eksperimen Diabetes Real Data")
-
 mlflow.sklearn.autolog()
 
 def train_diabetes_model():
-    data = pd.read_csv("diabetes_preprocessing.csv")
+    csv_path = "MLProject/diabetes_preprocessed.csv" if os.path.exists("MLProject/diabetes_preprocessed.csv") else "diabetes_preprocessed.csv"
+    data = pd.read_csv(csv_path)
     
     X = data.drop(columns=['target'])
     y = data['target']
